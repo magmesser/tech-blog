@@ -1,10 +1,10 @@
 :root {
-  --primary: #4D1A99;
-  --secondary: #9F5EFF;
-  --tertiary: #813EE6;
-  --quatrinary: #99940B;
-  --light: #E6E03E;
-  --dark: #182c23;
+  --primary: #869C76;
+  --secondary: #D5E8C7;
+  --tertiary: #99679C;
+  --quatrinary: #E3E3E3;
+  --light: #F5FFEF;
+  --dark: #99679C;
   /* --error: rgb(228, 46, 1); */
   --border-radius: 0.3rem;
 }
@@ -142,6 +142,10 @@ img {
   font-size: 1.4rem;
   text-align: center;
   font-weight: bold;
+}
+
+.card-signature {
+  text-align: right;
 }
 
 .post-title {

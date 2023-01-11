@@ -1,6 +1,22 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 
+// GET /api/comments
+router.get('/', async (req, res) => {
+  try {
+    const dbCommentData = await Comment.findAll({});
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbCommentData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // CREATE new comment
 router.post('/', async (req, res) => {
   try {

@@ -1,8 +1,10 @@
-<section class="card">
-  <a href="/comment/{{id}}">
-
-    <div class="card-body">
-      <p>{{comment_content}} <br><br> -- {{user_id}}, {{comment_date}} </p>
+<div class="comment">
+  {{#each this}}
+  <section class="comment-details">
+    <div>
+      {{comment_content}}
+      <br><br> -- {{user.username}}, {{format_date comment_date}}
     </div>
-  </a>
-</section>
+  </section>
+  {{/each}}
+</div>

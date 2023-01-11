@@ -62,10 +62,10 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 <!-- controllers
 - api -->
--- comment-routes.js  -- NEED REVIEW
+-- comment-routes.js  --  REVIEW, add in put and delete later 
 <!-- -- index.js --> correct
--- post-routes.js  -- NEED REVIEW
--- user-routes.js -- NEED REVIEW
+-- post-routes.js  -- REVIEW, add in put and delete later 
+-- user-routes.js -- REVIEW
 <!-- dashboard-routes.js --> ok?
 <!-- home-routes.js --> correct
 <!-- index.js --> correct
@@ -74,9 +74,8 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 <!-- - layouts -->
 <!-- -- main.handlebars --> fine
 <!-- - partials -->
--- comment-detail.handlebars -- NEED REVIEW
--- post-detail.handlebars -- NEED REVIEW
-comment.handlebars -- NEED REVIEW
+-- comment-detail.handlebars --  REVIEW
+-- post-detail.handlebars --  REVIEW
 <!-- homepage.handlebars -->
 <!-- login.handlebars -->
 post.handlebars -- NEED REVIEW
@@ -85,4 +84,5 @@ post.handlebars -- NEED REVIEW
 <!-- LICENSE -->
 <!-- README -->
 
-move over: controllers, models, views when done 
+public/js functions
+additional handlesbars pages 
