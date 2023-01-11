@@ -58,3 +58,31 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 ## Submission 
 - The URL of the deployed application on Heroku:
 - The URL of the GitHub repository: 
+
+
+<!-- controllers
+- api -->
+-- comment-routes.js  -- NEED REVIEW
+<!-- -- index.js --> correct
+-- post-routes.js  -- NEED REVIEW
+-- user-routes.js -- NEED REVIEW
+<!-- dashboard-routes.js --> ok?
+<!-- home-routes.js --> correct
+<!-- index.js --> correct
+
+<!-- views -->
+<!-- - layouts -->
+<!-- -- main.handlebars --> fine
+<!-- - partials -->
+-- comment-detail.handlebars -- NEED REVIEW
+-- post-detail.handlebars -- NEED REVIEW
+comment.handlebars -- NEED REVIEW
+<!-- homepage.handlebars -->
+<!-- login.handlebars -->
+post.handlebars -- NEED REVIEW
+
+<!-- .gitignore -->
+<!-- LICENSE -->
+<!-- README -->
+
+move over: controllers, models, views when done 

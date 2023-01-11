@@ -1,0 +1,12 @@
+{{#if loggedIn}}
+<section class="comment">
+  <div class="comment-details">
+     {{!-- <p>{{comment.comment_content}} <br><br> -- {{comment.user_id}}, {{comment_date}} </p> --}}
+ {{#each post.comments as |comment|}}
+    {{> comment-details}}
+    {{/each}}
+  </div>
+</section>
+{{else}}
+<a href="/login">You must login first to view this page</a>
+{{/if}}

@@ -17,10 +17,6 @@ router.get('/', async (req, res) => {
             attributes: ['username']
           }
         },
-        {
-          model: User, 
-          attributes: ['username']
-        }
       ],
     });
 
@@ -41,22 +37,11 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
-      attributes: [
-        'id', 'title', 'post_content', 'post_date'
-      ],
       include: [
         {
           model: Comment,
           attributes: ['id', 'comment_content', 'post_id', 'user_id', 'comment_date'],
-          include: {
-            model: User, 
-            attributes: ['username']
-          }
         },
-        {
-          model: User, 
-          attributes: ['username']
-        }
       ],
     });
 
