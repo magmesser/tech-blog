@@ -1,27 +1,31 @@
 <div class="card post-details">
-
-  
-    <header class="card-header">
-       <a href="/post/{{id}}"><h3 class="post-title">{{title}}</h3></a>
-     
-
-    </header>
- 
-
-    <div class="card-body">
-      <div>
-            {{post_content}}
-        </div>
-        <div class="card-signature">
-                
-                <br> By: {{user.username}} on {{format_date post_date}} <br><br> 
-                <b><a href="/post/{{id}}">Comments: {{comments.length}} </a></b>
-            </div>
+  <div class="row mb-4 project justify-center">
+    <div class="col-md-5">
+      <header class="card-header">
+        <a href="/post/{{id}}">
+          <h3 class="post-title">{{title}}</h3>
+        </a>
+      </header>
     </div>
-      
+    <div class="col-md-7">
+      <div class="card-body">
+
+        <p>
+          {{post_content}}
+        </p>
+
+        <div class="card-signature">
+          <p>
+            <br />
+            By:
+            {{user.username}}
+            on
+            {{format_date post_date}}
+            <br /><br />
+            <b><a href="/post/{{id}}">Comments: {{comments.length}} </a></b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-   
-            

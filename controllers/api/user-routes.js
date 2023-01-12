@@ -40,6 +40,11 @@ router.get('/:id', async (req, res) => {
       ]
     });
 
+    if (!dbUserData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+
     req.session.save(() => {
       req.session.loggedIn = true;
 
@@ -61,7 +66,8 @@ router.post('/', async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
 
       res.status(200).json(dbUserData);
     });
@@ -97,11 +103,8 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.loggedIn = true;
-      console.log(
-        '🚀 ~ file: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie',
-        req.session.cookie
-      );
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
 
       res
         .status(200)
@@ -109,7 +112,7 @@ router.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 

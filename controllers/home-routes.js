@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 // GET all posts for homepage
 router.get('/', async (req, res) => {
@@ -23,10 +24,11 @@ router.get('/', async (req, res) => {
         }
       ],
     });
-
+    // serializing data 
     const posts = postData.map((post) =>
       post.get({ plain: true })
     );
+    // render to handlebars template
     res.render('homepage', {
       posts,
       loggedIn: req.session.loggedIn,
@@ -38,7 +40,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one post
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       attributes: [
@@ -61,7 +63,7 @@ router.get('/post/:id', async (req, res) => {
     });
 
     const post = postData.get({ plain: true });
-    res.render('post', { post, loggedIn: req.session.loggedIn });
+    res.render('post', { ...post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -75,6 +77,15 @@ router.get('/login', (req, res) => {
     return;
   }
   res.render('login');
+});
+
+// Sign up route
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
 });
 
 module.exports = router;
