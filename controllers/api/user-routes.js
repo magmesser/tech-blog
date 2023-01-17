@@ -1,10 +1,13 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET /api/users 
 router.get('/', async (req, res) => {
   try {
-    const dbUserData = await User.findAll({});
+    const dbUserData = await User.findAll({
+      attributes: { exclude: ['password'] }
+    });
 
     req.session.save(() => {
       req.session.loggedIn = true;
@@ -24,6 +27,7 @@ router.get('/:id', async (req, res) => {
       where: {
         id: req.params.id
       },
+      attributes: { exclude: ['password'] },
       include: [
         {
           model: Comment,
@@ -74,6 +78,56 @@ router.post('/', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+});
+
+// EDIT user
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const dbUserData = await User.update({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!dbUserData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbUserData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
+// DELETE post
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const dbUserData = await User.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!dbUserData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbUserData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
   }
 });
 
