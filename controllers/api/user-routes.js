@@ -2,6 +2,64 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// GET /api/users 
+router.get('/', async (req, res) => {
+  try {
+    const dbUserData = await User.findAll({
+      attributes: { exclude: ['password'] }
+    });
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbUserData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET /api/users/1 
+router.get('/:id', async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        id: req.params.id
+      },
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_content', 'comment_date'],
+          include: {
+            model: Post, 
+            attributes: ['id', 'title', 'post_content', 'post_date']
+          }
+        },
+        {
+          model: Post, 
+          attributes: ['title']
+        }
+      ]
+    });
+
+    if (!dbUserData) {
+      res.status(404).json({ message: 'No user found with this id!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbUserData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // CREATE new user
 router.post('/', async (req, res) => {
   try {
