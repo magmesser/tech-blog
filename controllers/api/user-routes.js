@@ -1,67 +1,67 @@
-const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
-const withAuth = require('../../utils/auth');
+const router = require("express").Router();
+const { User, Post, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
-// GET /api/users 
-router.get('/', async (req, res) => {
-  try {
-    const dbUserData = await User.findAll({
-      attributes: { exclude: ['password'] }
-    });
+// // GET /api/users
+// router.get('/', async (req, res) => {
+//   try {
+//     const dbUserData = await User.findAll({
+//       attributes: { exclude: ['password'] }
+//     });
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
+//     req.session.save(() => {
+//       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+//       res.status(200).json(dbUserData);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
-// GET /api/users/1 
-router.get('/:id', async (req, res) => {
-  try {
-    const dbUserData = await User.findOne({
-      where: {
-        id: req.params.id
-      },
-      attributes: { exclude: ['password'] },
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_content', 'comment_date'],
-          include: {
-            model: Post, 
-            attributes: ['id', 'title', 'post_content', 'post_date']
-          }
-        },
-        {
-          model: Post, 
-          attributes: ['title']
-        }
-      ]
-    });
+// // GET /api/users/1
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const dbUserData = await User.findOne({
+//       where: {
+//         id: req.params.id,
+//       },
+//       attributes: { exclude: ["password"] },
+//       include: [
+//         {
+//           model: Comment,
+//           attributes: ["id", "comment_content", "comment_date"],
+//           include: {
+//             model: Post,
+//             attributes: ["id", "title", "post_content", "post_date"],
+//           },
+//         },
+//         {
+//           model: Post,
+//           attributes: ["title"],
+//         },
+//       ],
+//     });
 
-    if (!dbUserData) {
-      res.status(404).json({ message: 'No user found with this id!' });
-      return;
-    }
+//     if (!dbUserData) {
+//       res.status(404).json({ message: "No user found with this id!" });
+//       return;
+//     }
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
+//     req.session.save(() => {
+//       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+//       res.status(200).json(dbUserData);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 // CREATE new user
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
 });
 
 // EDIT user
-router.put('/:id', withAuth, async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
     const dbUserData = await User.update({
       where: {
@@ -91,7 +91,7 @@ router.put('/:id', withAuth, async (req, res) => {
     });
 
     if (!dbUserData) {
-      res.status(404).json({ message: 'No user found with this id!' });
+      res.status(404).json({ message: "No user found with this id!" });
       return;
     }
 
@@ -107,7 +107,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // DELETE post
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const dbUserData = await User.destroy({
       where: {
@@ -116,7 +116,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!dbUserData) {
-      res.status(404).json({ message: 'No user found with this id!' });
+      res.status(404).json({ message: "No user found with this id!" });
       return;
     }
 
@@ -132,7 +132,7 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 // Login - /api/users/login
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
@@ -141,9 +141,7 @@ router.post('/login', async (req, res) => {
     });
 
     if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email. Please try again!' });
+      res.status(400).json({ message: "Incorrect email. Please try again!" });
       return;
     }
 
@@ -152,7 +150,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect password. Please try again!' });
+        .json({ message: "Incorrect password. Please try again!" });
       return;
     }
 
@@ -162,7 +160,7 @@ router.post('/login', async (req, res) => {
 
       res
         .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+        .json({ user: dbUserData, message: "You are now logged in!" });
     });
   } catch (err) {
     console.log(err);
@@ -171,7 +169,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout - /api/users/logout
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
