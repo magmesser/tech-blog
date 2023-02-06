@@ -29,11 +29,11 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
     // render to handlebars template
-    if (req.session.logged_in) {
+   
     res.render('homepage', {
       posts,
       logged_in: req.session.logged_in,
-    });}
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
