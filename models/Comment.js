@@ -18,6 +18,7 @@ Comment.init(
     comment_date: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     post_id: {
       type: DataTypes.INTEGER,
@@ -36,6 +37,7 @@ Comment.init(
   },
   {
     sequelize,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',

@@ -29,10 +29,11 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
     // render to handlebars template
+    if (req.session.logged_in) {
     res.render('homepage', {
       posts,
-      loggedIn: req.session.loggedIn,
-    });
+      logged_in: req.session.logged_in,
+    });}
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -63,7 +64,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
 
     const post = postData.get({ plain: true });
-    res.render('post', { ...post, loggedIn: req.session.loggedIn });
+    res.render('post', { ...post, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -72,7 +73,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
 // Login route
 router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
+  if (req.session.logged_in) {
     res.redirect('/');
     return;
   }

@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
 
       res.status(200).json(dbCommentData);
     });
@@ -67,7 +67,7 @@ router.get('/:id', async (req, res) => {
       return;
     } 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
 
       res.status(200).json(dbPostData);
     });
@@ -88,7 +88,7 @@ router.post('/', withAuth, async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
 
       res.status(200).json(dbPostData);
     });
@@ -114,7 +114,7 @@ router.put('/:id', withAuth, async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
 
       res.status(200).json(dbPostData);
     });
@@ -140,7 +140,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
 
       res.status(200).json(dbPostData);
     });
