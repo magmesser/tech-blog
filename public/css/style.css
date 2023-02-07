@@ -146,12 +146,20 @@ h2 {
   justify-content: left;
 }
 
+.post-short {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: center;
+  padding: 10px 10px 25px 10px;
+}
+
 #comment-btn, #login-btn, #signup-btn, #post-btn, #edit-btn {
   background: var(--primary);
   color: var(--light);
 }
 
-#comment-btn:hover, #login-btn:hover, #signup-btn:hover, #edit-btn:hover {
+#comment-btn:hover, #login-btn:hover, #signup-btn:hover, #post-btn:hover, #edit-btn:hover {
   background: var(--secondary);
 }
 

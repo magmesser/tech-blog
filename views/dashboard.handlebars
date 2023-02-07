@@ -1,38 +1,83 @@
-  {{!-- add post form --}}
-<div class="row">
-  <div class="col-md-7">
-    <h2>Add a Post</h2>
-    <form class="form post-form">
-      <div class="form-group mb-3">
-        <label for="post-title" class="form-label">Title</label>
-        <input class="form-control form-input" type="text" name="title" id="post-title" placeholder="Enter post title"/>
-      </div>
+<div class="container text-center">
+<div class="row align-items-start">
 
-      <div class="form-group mb-3">
-        <label for="post-content" class="form-label">Content</label>
-        <textarea class="form-control form-input" type="text" name="post_content" id="post-content" placeholder="Enter post content" rows="3"/></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" id="post-btn">Add Post</button>
-    </form>
-  </div>
+{{!-- add post form --}}
+    <div class="col">
+        <h2>New Post</h2>
+        <form class="form post-form">
+            <div class="form-group mb-3">
+                <label for="post-title" class="form-label">Title</label>
+                <input class="form-control form-input" type="text" name="title" id="post-title"
+                    placeholder="Enter post title" />
+            </div>
 
-
-  {{#if posts.length}}
-<div class="col-md-5" id="postID">
-    <h2>Posts</h2>
-    {{#each posts as |post|}}
-    <div class="row mb-2" >
-      <div class="col-md-8">
-        <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
-      </div>
-      <div class="">
-        <button type="submit" class="btn btn-primary" id="edit-btn" edit-post-data-id="{{post.id}}">EDIT</button>
-        <button type="submit" class="btn btn-danger" id="delete-btn" delete-post-data-id="{{post.id}}">DELETE</button>
-      </div>
+            <div class="form-group mb-3">
+                <label for="post-content" class="form-label">Content</label>
+                <textarea class="form-control form-input" type="text" name="post_content" id="post-content"
+                    placeholder="Enter post content" rows="3" /></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="post-btn">CREATE</button>
+        </form>
     </div>
-    {{/each}}
-</div>
-{{/if}}
+
+ {{!-- edit --}}
+    {{#if posts.length}}
+    <div class="col" id="editPostID">
+        <h2>Edit Posts</h2>
+        {{#each posts as |post|}}
+        <div class="row mb-2 post-short">
+            <div class="col-md-8">
+                <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+            </div>
+           
+            <div class="">
+                              
+                {{!-- edit post form --}}
+                <form id="edit-post-form" class="form post-form">
+
+                    <div class="form-group mb-3">
+                        <label for="post-title" class="form-label">Edit Title</label>
+                        <input class="form-control form-input" type="text" name="edit-title" id="edit-post-title"
+                            placeholder="Enter new post title" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="post-content" class="form-label">Edit Content</label>
+                        <textarea class="form-control form-input" type="text" name="edit-post-content" id="edit-post-content"
+                            placeholder="Enter new post content" rows="3" /></textarea>
+                    </div>
+                   <button type="submit" class="btn btn-primary" id="edit-btn" edit-post-data-id="{{post.id}}"
+                    >EDIT</button><br><br>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    
+    </div>
+    {{/if}}
+
+
+{{!-- delete --}}
+
+ {{#if posts.length}}
+    <div class="col" id="postID">
+        <h2>Delete Posts</h2>
+        {{#each posts as |post|}}
+        <div class="row mb-2 post-short">
+            <div class="col-md-8">
+                <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+            </div>
+        
+
+            <div class="">
+                <button type="submit" class="btn btn-danger" id="delete-btn"
+                    delete-post-data-id="{{post.id}}">DELETE</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
 </div>
 
+</div>
 <script src="./js/post-crud.js"></script>
