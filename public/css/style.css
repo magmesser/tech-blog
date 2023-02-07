@@ -48,25 +48,26 @@ nav a {
   text-align: center;
 }
 
-a, header a, div a {
+a,
+header a,
+div a,
+h2 {
   color: var(--secondary);
   padding: 14px 20px;
   text-decoration: none;
   text-align: center;
 }
 
-a:hover, nav a:hover, header a:hover, div a:hover {
-  color: var(--light);
-}
-
-.btn-primary {
-  background: var(--primary);
+a:hover,
+nav a:hover,
+header a:hover,
+div a:hover {
   color: var(--light);
 }
 
 .container {
-  width: 1100px;
-  max-width: 100%;
+  width: 1000px;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -79,18 +80,6 @@ a:hover, nav a:hover, header a:hover, div a:hover {
   align-items: center;
 }
 
-.comment {
-  width: 50%;
-  background-color: white;
-  margin-bottom: 25px;
-}
-
-.comment-details {
-  text-align: center;
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
 .card {
   box-shadow: 10px 10px 14px -3px var(--primary);
   margin: 10px 20px;
@@ -99,7 +88,7 @@ a:hover, nav a:hover, header a:hover, div a:hover {
   flex: 0 1 300px;
   border: 7px double var(--dark);
   border-radius: 10px;
-}
+ }
 
 .card-title {
   background-color: transparent;
@@ -108,7 +97,8 @@ a:hover, nav a:hover, header a:hover, div a:hover {
   justify-content: center;
 }
 
-.post-title {
+.post-title,
+h2 {
   text-transform: uppercase;
   letter-spacing: 3px;
   background-color: white;
@@ -119,14 +109,28 @@ a:hover, nav a:hover, header a:hover, div a:hover {
 .card-body {
   font-size: 1.4rem;
   text-align: right;
-  
+
 }
 
 .card-signature {
   text-align: right;
 }
 
-.comment-form .post-form button {
+.comment {
+  /* width: 50%; */
+  background-color: var(--light);
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+.comment-details {
+  text-align: center;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.comment-form,
+.post-form {
   background: none;
   border: none;
   padding: 0;
@@ -137,9 +141,19 @@ a:hover, nav a:hover, header a:hover, div a:hover {
   margin-left: 16px;
 }
 
-#edit-btn {}
+.login-form, .signup-form {
+  padding: 0 40px ;
+  justify-content: left;
+}
 
-#delete-btn {}
+#comment-btn, #login-btn, #signup-btn, #post-btn, #edit-btn {
+  background: var(--primary);
+  color: var(--light);
+}
+
+#comment-btn:hover, #login-btn:hover, #signup-btn:hover, #edit-btn:hover {
+  background: var(--secondary);
+}
 
 /* LAYOUT */
 .container {

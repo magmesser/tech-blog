@@ -1,5 +1,39 @@
 <section class="container post">
-  
-    {{> post-details post}}
+
+    {{> post-details}}
+
+    <div class="col-md-5 standard rounded">
+        <h2 class="text-center">Comments</h2>
+
+        <div class="card comment" >
+            <ul class="list-group list-group-flush">
+                {{#each comments as |comment|}}
+                <li class="list-group-item">{{comment_content}}
+                    <br><br> By: {{user.username}} on {{ format_date comment_date}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    {{#if logged_in}}
+
+    <div class="col-md-5 p-5">
+        <form class="comment-form" data-postid={{id}} data-userid={{id}}>
+            <h2>New Comment</h2>
+            <div class="input-group">
+                <textarea class="form-control" id="comment_content" name="comment_content" placeholder="Enter new comment"></textarea>
+           <button type="submit" class="btn btn-primary" id="comment-btn">Add Comment</button>
+            </div>
+           
+                
+    
+        </form>
+    </div>
+    {{/if}}
+    </div>
+
+
+    <script src="/js/add-comment.js"></script>
 
 </section>
